@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "935238518480",
+    "firebase_url": "https://civiqapp-a3ab9.firebaseio.com",
+    "project_id": "civiqapp-a3ab9",
+    "storage_bucket": "civiqapp-a3ab9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935238518480:android:29f8b2f4b0e5634f",
+        "android_client_info": {
+          "package_name": "com.civiqapp.civiqapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935238518480-0tfpt43i66v44i12iekkifd433mllsgm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.civiqapp.civiqapp",
+            "certificate_hash": "db5e311ffd3a4f5c383353ece18da47be68880e1"
+          }
+        },
+        {
+          "client_id": "935238518480-mjpcqt8rsffsi4trv94on2bcmfif8b6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZP2cX28d19OsnErjvhTc5cPKbh1utAzE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935238518480-mjpcqt8rsffsi4trv94on2bcmfif8b6g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
