@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "935238518480-4ean0tn86u8gqhl2gg39q1veb08d2l2k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.civiqapp.civiqapp",
+            "certificate_hash": "8ade2b1fca4df0db28ddf5368ed470a10537daf2"
+          }
+        },
+        {
           "client_id": "935238518480-0tfpt43i66v44i12iekkifd433mllsgm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
