@@ -42,6 +42,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+//import com.google.firebase.quickstart.auth.R;
 
 /**
  * Demonstrate Firebase Authentication using a Google ID Token.
