@@ -9,7 +9,7 @@ android {
         exclude 'META-INF/NOTICE'
     }
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.civiqapp.civiqapp"
         minSdkVersion 15
@@ -41,7 +41,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:11.0.2'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.firebase:firebase-database:10.0.1'
+    compile 'com.google.firebase:firebase-database:11.0.2'
     testCompile 'junit:junit:4.12'
 }
 
