@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("hellomate", "Log");
         AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute("h", "h", "h");
+
+        runner.execute("h", "h", "h", "h");
+
     }
     public ProgressDialog mProgressDialog;
 
@@ -59,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         hideProgressDialog();
     }
 
-    private class AsyncTaskRunner extends AsyncTask<String,String, String> {
+    //private class AsyncTaskRunner extends AsyncTask<ArrayList<ArrayList<String>>,String, String> {
+    private class AsyncTaskRunner extends AsyncTask<String,String,String> {
 
-        public String doInBackground(String... params) {
+        public String doInBackground(String... queries) {
 
-            Log.d("hellomate", "async");
             try {
                 Document doc = Jsoup.connect("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en")
                         .data("query", "Java")
@@ -72,18 +74,19 @@ public class MainActivity extends AppCompatActivity {
                         .cookie("auth", "token")
                         .timeout(3000)
                         .get();
-                String title = doc.title();
+
                 String docs = doc.toString();
                 int length = docs.length();
-                Elements elems = doc.select("a.ME7ew.hzdq5d");
-                Elements elems1 = doc.select("img.lmFAjc");
-                //Log.d("tequila", elems.toString());
-                for (Element elem : elems) {
+
+                    Elements articles = doc.select("a.ME7ew.hzdq5d");
+                    Elements images = doc.select("img.lmFAjc");
+                    //Log.d("tequila", elems.toString());
+                    for (Element elem : articles) {
                     String href = elem.attr("href");
                     String header = elem.text();
-                    //Log.d("tequila", href.toString());
-                    //Log.d("tequila", header.toString());
-                Log.d("tequila", elems1.toString());
+                    Log.d("tequila", href.toString());
+                    Log.d("tequila", header.toString());
+                Log.d("tequila", images.toString());
                 }
 
                 for(int i=0; i<length; i+=1024)
@@ -99,9 +102,12 @@ public class MainActivity extends AppCompatActivity {
             catch (IOException e) {
                 Log.d("hellomatee", e.toString());
             }
+
+
             return "error";
+        }
+        protected void onPostExecute(String e) {
+
         }
     }
 }
-//*[@id="yDmH0d"]/c-wiz/c-wiz/main/div[1]/c-wiz/div/c-wiz[1]/c-wiz/div/div[2]/c-wiz/a
-//#yDmH0d > c-wiz > c-wiz > main > div.KaRWed.XogBlf > c-wiz > div > c-wiz.PaqQNc.QwxBBf > c-wiz > div > div.v4IxVd > c-wiz > a
