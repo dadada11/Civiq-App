@@ -64,47 +64,53 @@ public class MainActivity extends AppCompatActivity {
     //private class AsyncTaskRunner extends AsyncTask<ArrayList<ArrayList<String>>,String, String> {
     private class AsyncTaskRunner extends AsyncTask<String,String,String> {
 
-        public String doInBackground(String... queries) {
+        public ArrayList<ArrayList<String>> doInBackground(String... queries)
+        {
+            ArrayList<Arraylist<String>> updates = new ArrayList<Arraylist<String>>();
 
-            try {
-                Document doc = Jsoup.connect("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en")
-                        .data("query", "Java")
-                        .userAgent("Chrome")
-                        // .referrer("http://www.google.com")
-                        .cookie("auth", "token")
-                        .timeout(3000)
-                        .get();
-
-                String docs = doc.toString();
-                int length = docs.length();
-
-                    Elements articles = doc.select("a.ME7ew.hzdq5d");
-                    Elements images = doc.select("img.lmFAjc");
-                    //Log.d("tequila", elems.toString());
-                    for (Element elem : articles) {
-                    String href = elem.attr("href");
-                    String header = elem.text();
-                    Log.d("tequila", href.toString());
-                    Log.d("tequila", header.toString());
-                Log.d("tequila", images.toString());
-                }
-
-                for(int i=0; i<length; i+=1024)
+            for(String query : queries)
+            {
+                if(query.startsWith("https://news.google.com/news/local") // ISSA HTML
                 {
-                    if(i+1024<length)
-                        Log.d("hellomate", docs.substring(i, i+1024));
-                    else
-                        Log.d("hellomate", docs.substring(i, length));
+                    String article = "article";
+                    try
+                    {
+                        Document doc = Jsoup.connect(query)
+                                .data("query", "Java")
+                                .userAgent("Chrome")
+                                .cookie("auth", "token")
+                                .timeout(3000)
+                                .get();
+
+                        String docs = doc.toString();
+                        int length = docs.length();
+                        Elements articles = doc.select("a.ME7ew.hzdq5d");
+                        Elements images = doc.select("img.lmFAjc");
+                        Elements dates = doc.select("span.d5kXP.YBZVLb");
+                        //Log.d("tequila", elems.toString());
+                        Arraylist<String> update = new Arraylist<String>(); // order is type of post, url, headline, date, image
+                        for (Element elem : articles)
+                        {
+                            update.add(article);
+                            update.add(elem.attr("href").toString());
+                            update.add(elem.text().toString());
+                            update.add()
+                            Log.d("tequila", href.toString());
+                            Log.d("tequila", header.toString());
+                            Log.d("tequila", images.toString());
+                        }
+                    }
+
+                    catch (IOException e)
+                    {
+                        Log.d("hellomatee", e.toString());
+                    }
                 }
 
-                //Log.d("hellomate", doc.toString());
-            }
-            catch (IOException e) {
-                Log.d("hellomatee", e.toString());
             }
 
 
-            return "error";
+            return ?;
         }
         protected void onPostExecute(String e) {
 
