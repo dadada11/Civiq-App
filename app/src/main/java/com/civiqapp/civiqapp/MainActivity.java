@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity {
                             Element date = dates.get(imgcount);
                             if (imghref.get(i).attr("href").equals(articles.get(i).attr("href"))) {
                                // Log.d("tequilas", String.valueOf(images.size()));
-                                Log.d("tequila", "matches");
+                                //Log.d("tequila", "matches");
                             }
                             else {
                                 while (!(imghref.get(i).attr("href").equals(articles.get(imgcount).attr("href"))) )
-                                    Log.d("tequila", "don't matches");
+                                    //Log.d("tequila", "don't matches");
                                     imgcount += 1;
 
                             }
@@ -124,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
                             update.add(article);
                             update.add(elem.attr("href").toString());
                             update.add(elem.text().toString());
-                            //Log.d("tequila", elem.toString());
-                            //Log.d("tequila",git p img.toString());
+                            Log.d("tequila", elem.toString());
+                            Log.d("tequila", img.toString());
                             //Log.d("tequila", images.get(imgcount).toString());
-                            //Log.d("tequila", date.toString());
+                            Log.d("tequila", date.toString());
 
                             imgcount += 1;
 
