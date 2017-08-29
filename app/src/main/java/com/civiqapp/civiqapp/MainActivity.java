@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static org.jsoup.Connection.Method.HEAD;
+
 public class MainActivity extends AppCompatActivity {
 
     @VisibleForTesting
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 //}
 
            // }
-  //
+
 
             return "";
         }
