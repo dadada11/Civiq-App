@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             Element date = dates.get(imgcount);
                             if (imghref.get(i).attr("href").equals(articles.get(i).attr("href"))) {
                                // Log.d("tequilas", String.valueOf(images.size()));
-                               // Log.d("tequila", "matches");
+                               //shoe Log.d("tequila", "matches");
                             }
                             else {
                                 while (!(imghref.get(i).attr("href").equals(articles.get(imgcount).attr("href"))) )
