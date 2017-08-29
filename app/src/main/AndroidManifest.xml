@@ -20,9 +20,18 @@
         <activity
             android:name=".GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
-            android:name=".EmailPasswordActivity"
-            android:label="@string/label_emailpassword"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+        android:name=".MainActivity"
+        android:label="@string/label_emailpassword"
+        android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".MainActivity"
+
+            />
+        android:name=".MainActivity"
+        android:label="@string/label_emailpassword"
+        android:windowSoftInputMode="stateAlwaysHidden" />
+
+
 
     </application>
 

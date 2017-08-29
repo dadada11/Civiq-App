@@ -63,7 +63,7 @@ public class GoogleSignInActivity extends MainActivity implements
     private TextView mDetailTextView;
 
 
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
 
@@ -80,7 +80,8 @@ public class GoogleSignInActivity extends MainActivity implements
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 
-                .requestIdToken("935238518480-0tfpt43i66v44i12iekkifd433mllsgm.apps.googleusercontent.com")
+                .requestIdToken(getString(R.string.default_web_client_id))
+                //.requestIdToken("935238518480-0tfpt43i66v44i12iekkifd433mllsgm.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         // [END config_signin]
@@ -117,9 +118,13 @@ public class GoogleSignInActivity extends MainActivity implements
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+                Log.d("worked", "worked");
+                startActivity(new Intent(this, MainActivity.class));
+
             } else {
                 // Google Sign In failed, update UI appropriately
                 // [START_EXCLUDE]
+                Log.d("worked", "worked not");
                 updateUI(null);
                 // [END_EXCLUDE]
             }
