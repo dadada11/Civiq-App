@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                             update.add(elem.attr("href").toString());
                             update.add(elem.text().toString());
                             //Log.d("tequila", elem.toString());
-                            //Log.d("tequila", img.toString());
+                            //Log.d("tequila",git p img.toString());
                             //Log.d("tequila", images.get(imgcount).toString());
                             //Log.d("tequila", date.toString());
 
