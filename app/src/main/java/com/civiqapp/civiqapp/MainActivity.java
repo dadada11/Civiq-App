@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+import java.util.Date;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("theanswer", "worked nice");
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-           // mProgressDialog.setMessage(getString(R.string.loading));
+            // mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);
         }
 
@@ -75,86 +75,88 @@ public class MainActivity extends AppCompatActivity {
 
 
             //for(String query : queries)
-           // {
-                //if(query.startsWith("https://news.google.com/news/search/section/q/gun%20control%20WA/gun%20control%20WA?hl=en&ned=us"); // ISSA HTML
-               // {
-                    String article = "article";
-                    try
-                    {
+            // {
+            //if(query.startsWith("https://news.google.com/news/search/section/q/gun%20control%20WA/gun%20control%20WA?hl=en&ned=us"); // ISSA HTML
+            // {
+            String article = "article";
+            try
+            {
 
-                        Document doc = Jsoup.connect("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en")
-                                .data("query", "Java")
-                                .userAgent("Chrome")
-                                .cookie("auth", "token")
-                                .timeout(3000)
-                                .get();
+                Document doc = Jsoup.connect("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en")
+                        .data("query", "Java")
+                        .userAgent("Chrome")
+                        .cookie("auth", "token")
+                        .timeout(3000)
+                        .get();
 
-                        String docs = doc.toString();
-                        int length = docs.length();
-                        Elements articles = doc.select("a.ME7ew.hzdq5d");
-                        Elements images = doc.select("img.lmFAjc");
-                        Elements imghref= doc.select("a.MWG8ab");
-                        Elements dates = doc.select("span.d5kXP.YBZVLb");
-                        //Log.d("tequila", elems.toString());
+                String docs = doc.toString();
+                int length = docs.length();
+                Elements articles = doc.select("a.ME7ew.hzdq5d");
+                Elements images = doc.select("img.lmFAjc");
+                Elements imghref= doc.select("a.MWG8ab");
+                Elements dates = doc.select("span.d5kXP.YBZVLb");
+                //Log.d("tequila", elems.toString());
 
-                        //for (Element elem : articles)
-                        int imgcount = 0;
+                //for (Element elem : articles)
+                int imgcount = 0;
 
-                        ArrayList<String> update = new ArrayList<String>();;
-                        for (int i = 0; i <= images.size() - 1; i++)
-                        {
-                            update = new ArrayList<String>();
-                            Element img = images.get(i);
-                            elem = articles.get(imgcount);
-                            Element date = dates.get(imgcount);
-                            if (imghref.get(i).attr("href").equals(articles.get(i).attr("href"))) {
-                               // Log.d("tequilas", String.valueOf(images.size()));
-                               // Log.d("tequila", "matches");
-                            }
-                            else {
-                                while (!(imghref.get(i).attr("href").equals(articles.get(imgcount).attr("href"))) ) {
-                                    //Log.d("tequila", "don't matches");
-                                    imgcount++;
-                                }
+                ArrayList<String> update = new ArrayList<String>();;
+                for (int i = 0; i <= images.size() - 1; i++)
+                {
+                    update = new ArrayList<String>();
+                    Element img = images.get(i);
+                    elem = articles.get(imgcount);
+                    Element date = dates.get(imgcount);
+                    if (imghref.get(i).attr("href").equals(articles.get(i).attr("href"))) {
+                        // Log.d("tequilas", String.valueOf(images.size()));
+                        // Log.d("tequila", "matches");
+                    }
+                    else {
+                        while (!(imghref.get(i).attr("href").equals(articles.get(imgcount).attr("href"))) ) {
+                            //Log.d("tequila", "don't matches");
+                            imgcount++;
+                        }
 
-                            }
+                    }
 
-                            update.add("article");
-                            update.add(elem.attr("href"));
-                            update.add(elem.text());
-                            update.add(date.text());
-                            update.add(img.attr("src"));
-                            //Log.d("whiskey", Arrays.deepToString(update.toArray()));
-                            updates.add(update);
+
+                    update.add("article");
+                    update.add(elem.attr("href"));
+                    update.add(elem.text());
+                    update.add(date.text());
+                    update.add(img.attr("src"));
+                    //Log.d("whiskey", Arrays.deepToString(update.toArray()));
+                    updates.add(update);
 
 //                            Log.d("tequila", elem.toString());
 //                            Log.d("tequila",img.toString());
 //                            Log.d("tequila", images.get(imgcount).toString());
 //                            Log.d("tequila", date.toString());
-                            // order is type of post, url, headline, date, image
-                            imgcount ++;
+                    // order is type of post, url, headline, date, image
+                    imgcount ++;
 
-                        }
-                        for (ArrayList<String> i:updates) {
-                            Log.d("whiskey", Arrays.deepToString(i.toArray()));
+                }
+                for (ArrayList<String> i:updates) {
+                    Log.d("whiskey", Arrays.deepToString(i.toArray()));
 
-                        }
+                }
 
-                        String updateArr[] = new String[update.size()];
+                String updateArr[] = new String[update.size()];
 
-                        updateArr = update.toArray(updateArr);
-                        ArrayAdapter adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.activity_main, updateArr);
+                updateArr = update.toArray(updateArr);
+                ArrayAdapter adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.activity_main, updateArr);
 
-                    }
+            }
 
-                    catch (IOException e)
-                    {
-                        Log.d("hellomatee", e.toString());
-                    }
-                //}
+            catch (IOException e)
+            {
+                Log.d("hellomatee", e.toString());
+            }
+            //}
 
-           // }
+            // }
 //
+
 
             return updates;
         }

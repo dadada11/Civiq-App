@@ -203,11 +203,13 @@ public class GoogleSignInActivity extends MainActivity implements
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
+            startActivity(new Intent(this, MainActivity.class));
             mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+
         } else {
             mStatusTextView.setText(R.string.signed_out);
             mDetailTextView.setText(null);
@@ -227,6 +229,7 @@ public class GoogleSignInActivity extends MainActivity implements
 
     @Override
     public void onClick(View v) {
+
         int i = v.getId();
         if (i == R.id.sign_in_button) {
             signIn();
