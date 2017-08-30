@@ -62,10 +62,10 @@ public class GoogleSignInActivity extends MainActivity implements
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
+
 
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
