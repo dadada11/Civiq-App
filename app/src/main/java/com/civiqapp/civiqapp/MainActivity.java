@@ -1,6 +1,7 @@
 package com.civiqapp.civiqapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
@@ -10,6 +11,9 @@ import android.view.Menu;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         AsyncTaskRunner runner = new AsyncTaskRunner();
 
-        runner.execute("h", "h", "h", "h");
+        runner.execute("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en", "h", "h", "h");
         //something = (TextView) findViewById(R.id.textView);
         //something.setText("hoe");
     }
@@ -69,10 +73,18 @@ public class MainActivity extends AppCompatActivity {
     //private class AsyncTaskRunner extends AsyncTask<ArrayList<ArrayList<String>>,String, String> {
     private class AsyncTaskRunner extends AsyncTask<String,String,ArrayList<ArrayList<String>>> {
         Element elem;
-        public ArrayList<ArrayList<String>> doInBackground(String... queries)
+        public ArrayList<ArrayList<String>> doInBackground(String... query)
         {
             ArrayList<ArrayList<String>> updates = new ArrayList<ArrayList<String>>();
+            Date dat = new Date(); // your date
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dat);
+            int year = cal.get(Calendar.YEAR);
+            String month = new SimpleDateFormat("MMM").format(cal.getTime());
+            int day = cal.get(Calendar.DAY_OF_MONTH);
 
+            String dateToday = (month + " " + String.valueOf(day) + ", " + String.valueOf(year));
+            Log.d("date", dateToday);
 
             //for(String query : queries)
             // {
@@ -81,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
             String article = "article";
             try
             {
+//                Document doc = Jsoup.connect("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en")
+                Document doc = Jsoup.connect(query[0])
 
-                Document doc = Jsoup.connect("https://news.google.com/news/local/section/geo/Sammamish,%20WA%2098075,%20United%20States/Sammamish,%20Washington?ned=us&hl=en")
                         .data("query", "Java")
                         .userAgent("Chrome")
                         .cookie("auth", "token")
@@ -106,7 +119,13 @@ public class MainActivity extends AppCompatActivity {
                     update = new ArrayList<String>();
                     Element img = images.get(i);
                     elem = articles.get(imgcount);
+
                     Element date = dates.get(imgcount);
+                    String displayDate = date.text();
+                    if (date.text().contains("ago")) {
+                        displayDate = dateToday;
+
+                    }
                     if (imghref.get(i).attr("href").equals(articles.get(i).attr("href"))) {
                         // Log.d("tequilas", String.valueOf(images.size()));
                         // Log.d("tequila", "matches");
@@ -119,11 +138,10 @@ public class MainActivity extends AppCompatActivity {
 
                     }
 
-
                     update.add("article");
                     update.add(elem.attr("href"));
                     update.add(elem.text());
-                    update.add(date.text());
+                    update.add(displayDate);
                     update.add(img.attr("src"));
                     //Log.d("whiskey", Arrays.deepToString(update.toArray()));
                     updates.add(update);
@@ -157,11 +175,10 @@ public class MainActivity extends AppCompatActivity {
             // }
 //
 
-
             return updates;
         }
         protected void onPostExecute(String e) {
-
+            //startActivity(new Intent(this, SignInForm.class));
             //something.setText(elem.toString());
         }
     }
